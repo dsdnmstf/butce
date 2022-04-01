@@ -1,4 +1,3 @@
-
 export const initialState = {
   transactions: [
     { id: 1, text: "Flower", amount: -20 },
@@ -8,9 +7,23 @@ export const initialState = {
   ],
 };
 
-export const reducer=(state, action)=>{
-    switch(action.type){
-        default:
-            return state;
-    }
-}
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case "DELETE_BUTTON":
+      return {
+        ...state,
+        transactions: state.transactions.filter(
+          (item) => item.id !== action.payload
+        ),
+      };
+    case "ADD_BUTTON":
+      return {
+        ...state,
+
+        transactions: [action.payload, ...state.transactions],
+      };
+
+    default:
+      return state;
+  }
+};

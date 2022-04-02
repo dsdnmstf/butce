@@ -4,16 +4,19 @@ import { GlobalContext } from "../context/GlobalState";
 const AddTransaction = () => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState("");
-  const {addButton} = useContext(GlobalContext);
+  const { addButton } = useContext(GlobalContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = {
       id: Math.floor(Math.random() * 100000),
-      text,
+      text: text,
       amount: +amount,
     };
+
     addButton(newItem);
+    setText("");
+    setAmount("");
   };
   return (
     <div>
@@ -26,6 +29,7 @@ const AddTransaction = () => {
             type="text"
             id="text"
             placeholder="Enter text..."
+            value={text}
           />
         </div>
         <div className="form-control">
@@ -38,6 +42,7 @@ const AddTransaction = () => {
             type="number"
             id="amount"
             placeholder="Enter amount..."
+            value={amount}
           />
         </div>
         <button type="submit" onClick={handleSubmit} className="btn">
